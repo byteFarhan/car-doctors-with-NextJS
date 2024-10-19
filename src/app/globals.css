@@ -2,8 +2,61 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  h1 {
+    @apply lg:text-6xl font-bold lg:leading-[75px] leading-normal text-4xl;
+  }
+  h2 {
+    @apply text-secondary text-3xl leading-snug md:leading-normal md:text-[45px] font-bold;
+  }
+  h3 {
+    @apply text-secondary text-[35px] font-bold;
+  }
+  h4 {
+    @apply text-2xl font-bold text-secondary;
+  }
+  h5 {
+    @apply text-xl font-bold text-secondary;
+  }
+  p {
+    @apply text-base capitalize text-neutral;
+  }
+}
+
+@layer components {
+  /* .btn-common{} */
+  .btn-default {
+    @apply px-5 py-2 text-lg font-semibold text-white transition-transform duration-100 rounded-sm focus:outline-none hover:scale-95;
+  }
+  .btn-fill {
+    @apply px-3 text-white border-none rounded lg:px-5 lg:text-lg btn bg-primary focus:border-none hover:bg-primary;
+  }
+  .btn-transparent {
+    @apply px-3 bg-transparent lg:text-lg lg:px-5 btn btn-outline hover:bg-transparent;
+  }
+
+  .btn-transparent-red {
+    @apply rounded border-primary hover:border-primary text-primary hover:text-primary;
+  }
+  .btn-transparent-gray {
+    @apply text-white border-2 rounded border-neutral hover:border-neutral hover:bg-transparent;
+  }
+  /* .btn-fill {
+    @apply bg-primary;
+  } */
+  /* .btn-transparent {
+    @apply bg-transparent border-neutral;
+  } */
+}
+
 @layer utilities {
   .text-balance {
     text-wrap: balance;
   }
+}
+
+::selection {
+  background: #ff3811;
+  color: white;
+  /* border-radius: 15px; */
 }
