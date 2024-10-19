@@ -1,0 +1,40 @@
+// import { useEffect, useState } from "react";
+// import SectionIntro from "../SectionIntro/SectionIntro";
+import SectionIntro from "@/components/SectionIntro/SectionIntro";
+import ServiceCard from "./ServiceCard/ServiceCard";
+import { services } from "../../../../public/data/services";
+// import getTopServices from "@/lib/getTopServices";
+
+const Services = async () => {
+  //   const [services, setServices] = useState([]);
+  //   useEffect(() => {
+  //     fetch("data/services.json")
+  //       .then((res) => res.json())
+  //       .then((data) => setServices(data));
+  //   }, []);
+  //   const topServices = await getTopServices();
+  console.log(services);
+
+  return (
+    <>
+      <section id="services" className="mt-32 mb-20">
+        <SectionIntro
+          sectionCategory="Service"
+          sectionTitle="Our Service Area"
+          sectionDescription="the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. "
+        />
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+          {services &&
+            services?.map((service) => (
+              <ServiceCard key={service.service_id} service={service} />
+            ))}
+        </div>
+        <button className="block mx-auto my-10 btn-transparent btn-transparent-red">
+          More Services
+        </button>
+      </section>
+    </>
+  );
+};
+
+export default Services;

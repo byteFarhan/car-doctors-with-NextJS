@@ -1,5 +1,6 @@
 import About from "@/components/HomePage/AboutUs/AboutUs";
 import Carousel from "@/components/HomePage/Carousel/Carousel";
+import Services from "@/components/HomePage/Services/Services";
 import Image from "next/image";
 
 export default function Home() {
@@ -7,6 +8,7 @@ export default function Home() {
     <main className="container">
       <Carousel></Carousel>
       <About></About>
+      <Services></Services>
     </main>
   );
 }
