@@ -36,6 +36,9 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en" data-theme="light">
+      <head>
+        <link rel="icon" href="/assets/logo.svg" />
+      </head>
       <body className={`${inter.className} antialiased`}>
         <Navbar></Navbar>
         {children}

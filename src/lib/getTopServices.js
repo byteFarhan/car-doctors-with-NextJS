@@ -1,5 +1,5 @@
 async function getTopServices() {
-  const resp = await fetch("../../public/data/top-services.json");
+  const resp = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/top-services`);
   return await resp.json();
 }
 

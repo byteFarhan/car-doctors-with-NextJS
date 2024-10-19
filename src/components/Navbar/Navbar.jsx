@@ -43,14 +43,16 @@ const Navbar = () => {
     { routeName: "Services", routePath: "/services" },
     { routeName: "Blog", routePath: "/blog" },
     { routeName: "Contact", routePath: "/contact" },
-    { routeName: "Login", routePath: "/login" },
+    { routeName: "Login", routePath: "/login", isLgHidden: true },
   ];
   const currentPath = usePathname();
   const navLinks = navItems.map((item) => (
     <li key={item.routePath}>
       <Link
         href={item.routePath}
-        className={`${item.routePath === currentPath && "text-primary"}`}
+        className={`${item.routePath === currentPath && "text-primary"} ${
+          item.isLgHidden && "block md:hidden"
+        }`}
       >
         {item.routeName}
       </Link>
@@ -95,7 +97,19 @@ const Navbar = () => {
         </ul>
       </div>
       <div className="navbar-end">
-        {/* <a className="btn">Button</a> */}
+        {!user ? (
+          <Link
+            href="/login"
+            className="hidden px-4 py-3 mr-3 font-medium text-white border-transparent rounded-md bg-primary md:block"
+          >
+            Login
+          </Link>
+        ) : (
+          <button className="hidden px-4 py-3 mr-3 font-medium text-white border-transparent rounded-md bg-primary md:block">
+            Logout
+          </button>
+        )}
+
         <Link href={"/appointment"}>
           {/* <button className="bg-transparent px-7 border-primary btn btn-outline text-primary hover:bg-transparent hover:text-primary hover:border-primary">
             Appointment
