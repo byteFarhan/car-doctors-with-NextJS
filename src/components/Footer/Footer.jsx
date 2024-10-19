@@ -1,7 +1,7 @@
 import logo from "../../../public/assets/logo.svg";
 import { FaGoogle, FaTwitter, FaInstagram, FaLinkedin } from "react-icons/fa";
-// import SocialIcon from "../../../components/SocialIcon";
 import Image from "next/image";
+import SocialIcon from "../SocialIcon/SocialIcon";
 const Footer = () => {
   return (
     <footer id="footer" className=" py-20 bg-[#151515] text-[#E8E8E8]">
@@ -18,7 +18,7 @@ const Footer = () => {
             trainer who is also a serial.
           </p>
           <div className="flex gap-3 text-lg my-1 text-white [&>*]:p-2 [&>*]:rounded-full  [&>*]:bg-slate-800">
-            {/* <SocialIcon>
+            <SocialIcon>
               <FaGoogle />
             </SocialIcon>
             <SocialIcon>
@@ -29,7 +29,7 @@ const Footer = () => {
             </SocialIcon>
             <SocialIcon>
               <FaLinkedin />
-            </SocialIcon> */}
+            </SocialIcon>
           </div>
         </aside>
         <nav>
