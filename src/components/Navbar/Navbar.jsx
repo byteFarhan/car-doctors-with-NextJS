@@ -1,16 +1,10 @@
 "use client";
 import Image from "next/image";
-// import RouteStyle from "../../../components/RouteStyle";
-// import logo from "../../../assets/logo.svg";
-// import logo from "../../..//assets/logo.svg";
 import logo from "../../../public/assets/logo.svg";
 import Link from "next/link";
-// import { useContext } from "react";
-// import { AuthContext } from "../../../Providers/AuthProvider";
-// import swal from "sweetalert";
+import { usePathname } from "next/navigation";
 const Navbar = () => {
   const user = false;
-  //   const { user, userLogOut } = useContext(AuthContext);
   //   const handleLogout = () => {
   //     swal({
   //       title: "Are you sure?",
@@ -43,49 +37,26 @@ const Navbar = () => {
   //     //     swal(error.message);
   //     //   });
   //   };
-  // const navLinks = [
-  //   { routeName: "Home", routePath: "/" },
-  //   { routeName: "About", routePath: "/about" },
-  //   { routeName: "Services", routePath: "/services" },
-  //   { routeName: "Blog", routePath: "/blog" },
-  //   { routeName: "Contact", routePath: "/contact" },
-  //   { routeName: "Login", routePath: "/login" },
-  // ];
-  const navLinks = (
-    <>
-      <li>
-        <Link href="/">Home</Link>
-      </li>
-      <li>
-        <Link href="/about">About</Link>
-      </li>
-      <li>
-        <Link href="/services">Services</Link>
-      </li>
-      <li>
-        <Link href="/blog">Blog</Link>
-      </li>
-      <li>
-        <Link href="/contact">Contact</Link>
-      </li>
-      {/* {!user && (
-        <li>
-          <RouteStyle routeName="Login" routePath="/login" />
-        </li>
-      )} */}
-      {user ? (
-        <li>
-          <button onClick={handleLogout} className="font-semibold text-primary">
-            Logout
-          </button>
-        </li>
-      ) : (
-        <li>
-          <Link href="/login">Login</Link>
-        </li>
-      )}
-    </>
-  );
+  const navItems = [
+    { routeName: "Home", routePath: "/" },
+    { routeName: "About", routePath: "/about" },
+    { routeName: "Services", routePath: "/services" },
+    { routeName: "Blog", routePath: "/blog" },
+    { routeName: "Contact", routePath: "/contact" },
+    { routeName: "Login", routePath: "/login" },
+  ];
+  const currentPath = usePathname();
+  const navLinks = navItems.map((item) => (
+    <li key={item.routePath}>
+      <Link
+        href={item.routePath}
+        className={`${item.routePath === currentPath && "text-primary"}`}
+      >
+        {item.routeName}
+      </Link>
+    </li>
+  ));
+
   return (
     <nav className="container navbar max-w-7xl">
       <div className="navbar-start">
@@ -107,36 +78,19 @@ const Navbar = () => {
             </svg>
           </div>
           <ul className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box font-medium w-52">
-            {/* {navLinks?.map((navLink) => (
-            <li key={navLink.routeName}>
-              <RouteStyle
-                routeName={navLink.routeName}
-                routePath={navLink.routePath}
-              />
-            </li>
-          ))} */}
             {navLinks}
           </ul>
         </div>
-        {/* <a className="text-xl btn btn-ghost">{logo}</a> */}
-        <a href="/">
+        <Link href="/">
           <Image
             src={logo}
             alt="logo..."
             className="w-16 h-16 lg:w-24 lg:h-24"
           />
-        </a>
+        </Link>
       </div>
       <div className="hidden navbar-center lg:flex">
         <ul className="gap-5 px-1 text-lg font-medium menu-horizontal">
-          {/* {navLinks?.map((navLink) => (
-            <li key={navLink.routeName}>
-              <RouteStyle
-                routeName={navLink.routeName}
-                routePath={navLink.routePath}
-              />
-            </li>
-          ))} */}
           {navLinks}
         </ul>
       </div>
