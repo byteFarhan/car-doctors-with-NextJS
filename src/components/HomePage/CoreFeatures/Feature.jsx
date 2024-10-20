@@ -10,9 +10,10 @@ const Feature = ({ featureName, featureIcon }) => {
       <Image
         src={featureIcon}
         alt="feature"
-        className="mx-auto"
+        className="object-fill mx-auto size-[50px]"
         height={50}
         width={50}
+        draggable={false}
       />
       <h5
         className={`text-lg text-center ${
