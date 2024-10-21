@@ -9,7 +9,7 @@ const ProductCard = ({ product }) => {
           <Image
             src={img}
             alt={title}
-            className="object-cover  h-[160px] w-auto mx-auto"
+            className="object-cover h-[160px] w-auto mx-auto"
             // fill
             width={160}
             height={160}

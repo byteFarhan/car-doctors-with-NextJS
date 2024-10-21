@@ -6,7 +6,7 @@ const PopularProducts = async () => {
     `${process.env.NEXT_PUBLIC_API_URL}/api/popular-products`
   );
   const products = await resp.json();
-  //   console.log(products);
+  // console.log(products);
   return (
     <>
       <section id="popularProducts" className="my-40">

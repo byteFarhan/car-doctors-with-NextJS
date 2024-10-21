@@ -1,13 +1,16 @@
 import { connectDB } from "@/lib/connectDB";
-import { services } from "@/../public/data/services";
+// import { services } from "@/../public/data/services";
+// import { team } from "@/../public/data/team";
+import { popularProducts } from "@/../public/data/popularProducts";
 import { NextResponse } from "next/server";
+import { testimonialData } from "../../../../public/data/testimonialData";
 
 export async function GET() {
   const db = await connectDB();
-  const topServicesCollection = db.collection("top-services");
+  const collection = db.collection("testimonial-data");
   try {
-    await topServicesCollection.deleteMany();
-    const resp = await topServicesCollection.insertMany(services);
+    await collection.deleteMany();
+    const resp = await collection.insertMany(testimonialData);
     return NextResponse.json({ message: "Seeded successfully.", resp });
   } catch (error) {
     return NextResponse.json({ error });

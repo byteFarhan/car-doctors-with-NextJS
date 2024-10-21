@@ -5,6 +5,7 @@ import CoreFeatures from "@/components/HomePage/CoreFeatures/CoreFeatures";
 import OurTeam from "@/components/HomePage/OurTeam/OurTeam";
 import PopularProducts from "@/components/HomePage/PopularProducts;/PopularProducts";
 import Services from "@/components/HomePage/Services/Services";
+import Testimonial from "@/components/HomePage/Testimonial/Testimonial";
 import Image from "next/image";
 
 export default function Home() {
@@ -17,6 +18,7 @@ export default function Home() {
       <PopularProducts></PopularProducts>
       <OurTeam></OurTeam>
       <CoreFeatures></CoreFeatures>
+      <Testimonial></Testimonial>
     </main>
   );
 }

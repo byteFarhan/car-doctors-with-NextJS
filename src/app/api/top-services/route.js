@@ -1,6 +1,12 @@
+import { connectDB } from "@/lib/connectDB";
 import { NextResponse } from "next/server";
-import { services } from "../../../../public/data/services";
 
-export function GET() {
-  return NextResponse.json(services);
+export async function GET() {
+  try {
+    const db = await connectDB();
+    const topServices = await db.collection("top-services").find().toArray();
+    return NextResponse.json(topServices);
+  } catch (error) {
+    return NextResponse.json({ message: "Something went wrong!", error });
+  }
 }

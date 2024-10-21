@@ -1,26 +1,16 @@
+import { connectDB } from "@/lib/connectDB";
 import { NextResponse } from "next/server";
 
-export function GET() {
-  return NextResponse.json(team);
+export async function GET() {
+  try {
+    const db = await connectDB();
+    const team = await db.collection("team").find().toArray();
+    return NextResponse.json(team);
+  } catch (error) {
+    return NextResponse.json({
+      message: "Seomthing went wrong!",
+      error,
+      status: 500,
+    });
+  }
 }
-
-const team = [
-  {
-    id: 1,
-    job_title: "Engine Expert",
-    job_category: "Car Engine Plug",
-    img: "https://i.postimg.cc/9Xpy40SD/1.jpg",
-  },
-  {
-    id: 2,
-    job_title: "Engine Expert",
-    job_category: "Car Engine Plug",
-    img: "https://i.postimg.cc/ZnVNXs38/2.jpg",
-  },
-  {
-    id: 3,
-    job_title: "Engine Expert",
-    job_category: "Car Engine Plug",
-    img: "https://i.postimg.cc/bNwk18c3/3.jpg",
-  },
-];

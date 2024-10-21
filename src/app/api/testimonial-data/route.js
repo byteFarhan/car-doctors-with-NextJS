@@ -4,13 +4,12 @@ import { NextResponse } from "next/server";
 export async function GET() {
   try {
     const db = await connectDB();
-    const products = await db.collection("popular-products").find().toArray();
-    return NextResponse.json(products);
+    const resp = await db.collection("testimonial-data").find().toArray();
+    return NextResponse.json(resp);
   } catch (error) {
-    return NextResponse.json({
-      message: "Something went wrong!",
+    return NextResponse.status(400).json({
+      message: "An error occoured!",
       error,
-      status: 500,
     });
   }
 }

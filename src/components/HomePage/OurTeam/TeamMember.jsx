@@ -8,14 +8,14 @@ import {
   FaInstagram,
 } from "react-icons/fa";
 const TeamMember = ({ member }) => {
-  const { job_category, job_title, img } = member;
+  const { job_category, job_title, img, name } = member;
   return (
     <div className="p-6 space-y-4 rounded-md shadow">
       <figure className="">
         <Image
           src={img}
-          alt={`person`}
-          className="object-cover h-[250px] w-full rounded-md"
+          alt={name}
+          className="object-cover h-[250px] w-full rounded-md cursor-pointer"
           //   fill
           width={250}
           height={250}
