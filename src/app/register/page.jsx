@@ -23,6 +23,7 @@ const Register = () => {
       email,
       password,
       role: "member",
+      image: "https://i.postimg.cc/ZnVNXs38/2.jpg",
     };
     // console.log(newUser);
     const resp = await fetch(

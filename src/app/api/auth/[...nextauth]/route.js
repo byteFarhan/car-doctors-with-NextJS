@@ -33,6 +33,18 @@ export const handler = NextAuth({
   pages: {
     signIn: "/login",
   },
-  callbacks: {},
+  callbacks: {
+    async jwt({ token, account, user }) {
+      // Persist the OAuth access_token and or the user id to the token right after signin
+      if (account) {
+        token.role = user.role;
+      }
+      return token;
+    },
+    async session({ session, token }) {
+      session.user.role = token.role;
+      return session;
+    },
+  },
 });
 export { handler as GET, handler as POST };
