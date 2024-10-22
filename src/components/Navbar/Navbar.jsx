@@ -4,7 +4,7 @@ import logo from "../../../public/assets/logo.svg";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 const Navbar = () => {
-  const user = false;
+  const user = true;
   //   const handleLogout = () => {
   //     swal({
   //       title: "Are you sure?",
@@ -43,7 +43,8 @@ const Navbar = () => {
     { routeName: "Services", routePath: "/services" },
     { routeName: "Blog", routePath: "/blog" },
     { routeName: "Contact", routePath: "/contact" },
-    { routeName: "Login", routePath: "/login", isLgHidden: true },
+    { routeName: "Appointment", routePath: "/appointment", isLgHidden: true },
+    // { routeName: "Login", routePath: "/login", isLgHidden: true },
   ];
   const currentPath = usePathname();
   const navLinks = navItems.map((item) => (
@@ -100,20 +101,38 @@ const Navbar = () => {
         {!user ? (
           <Link
             href="/login"
-            className="hidden px-4 py-3 mr-3 font-medium text-white border-transparent rounded-md bg-primary md:block"
+            className="px-4 py-3 mr-3 font-medium text-white border-transparent rounded-md bg-primary md:block"
           >
             Login
           </Link>
         ) : (
-          <button className="hidden px-4 py-3 mr-3 font-medium text-white border-transparent rounded-md bg-primary md:block">
-            Logout
-          </button>
+          <div className="">
+            <div
+              tabIndex={0}
+              role="button"
+              className="avatar online placeholder dropdown dropdown-end"
+            >
+              <div className="w-12 rounded-full bg-neutral text-neutral-content lg:w-14">
+                <span className="text-xl">AI</span>
+              </div>
+              <ul
+                tabIndex={0}
+                className="dropdown-content menu space-y-2 lg:space-y-3 bg-base-100 rounded-box z-[1] w-52 p-2 shadow"
+              >
+                <li>
+                  <a>Item 1</a>
+                </li>
+                <li className="rounded-md hover:bg-black">
+                  <button className="px-3 py-2 font-medium text-white border-transparent rounded-md md:px-4 md:py-3 bg-primary md:block">
+                    Logout
+                  </button>
+                </li>
+              </ul>
+            </div>
+          </div>
         )}
 
-        <Link href={"/appointment"}>
-          {/* <button className="bg-transparent px-7 border-primary btn btn-outline text-primary hover:bg-transparent hover:text-primary hover:border-primary">
-            Appointment
-          </button> */}
+        <Link href={"/appointment"} className="hidden md:block md:ml-4">
           <button className="btn-transparent btn-transparent-red">
             Appointment
           </button>
