@@ -3,7 +3,7 @@ import Image from "next/image";
 import logo from "../../../public/assets/logo.svg";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useSession } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 const navItems = [
   { routeName: "Home", routePath: "/" },
   { routeName: "About", routePath: "/about" },
@@ -96,7 +96,10 @@ const Navbar = () => {
                 <li className="text-xs lg:text-sm">{user?.name}</li>
                 <li className="text-xs lg:text-sm">{user?.email}</li>
                 <li className="transition-all duration-100 rounded-md hover:bg-black">
-                  <button className="px-3 py-2 font-medium text-white border-transparent rounded-md md:px-4 md:py-3 bg-primary md:block">
+                  <button
+                    onClick={() => signOut({ redirect: false })}
+                    className="px-3 py-2 font-medium text-white border-transparent rounded-md md:px-4 md:py-3 bg-primary md:block"
+                  >
                     Logout
                   </button>
                 </li>
