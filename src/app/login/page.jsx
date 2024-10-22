@@ -1,40 +1,41 @@
 "use client";
-// import { FaFacebookF, FaLinkedinIn } from "react-icons/fa";
-// import { useContext, useState } from "react";
-// import { Helmet } from "react-helmet-async";
 import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
-// import { Link, useNavigate } from "react-router-dom";
 import loginSvg from "@/../public/assets/images/login/login.svg";
-// import { AuthContext } from "../../Providers/AuthProvider";
-// import swal from "sweetalert";
+import Swal from "sweetalert2";
 import SocialLogin from "@/components/SocialLogin/SocialLogin";
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-// import googleIcon from "../../assets/icons/google-icon.png";
+import { signIn } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 const Login = () => {
-  //   const { userLogin } = useContext(AuthContext);
-  //   const navigate = useNavigate();
+  const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
-  //   const handleLogin = (e) => {
-  //     e.preventDefault();
-  //     const form = e.target;
-  //     // console.log(form);
-  //     const email = form.email.value;
-  //     const password = form.password.value;
-  //     // console.log(email, password);
-  //     userLogin(email, password)
-  //       .then((result) => {
-  //         swal("Good job!", "Sing In Successfull.", "success");
-  //         navigate(location?.state ? location.state : "/");
-  //       })
-  //       .catch((error) => {
-  //         swal({
-  //           title: error.message,
-  //         });
-  //       });
-  //   };
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const email = form.email.value;
+    const password = form.password.value;
+    // console.log(email, password);
+    const resp = await signIn("credentials", {
+      email,
+      password,
+      redirect: false,
+    });
+    // console.log(resp);
+    if (resp.ok) {
+      form.reset();
+      router.push("/");
+      Swal.fire({
+        position: "top-end",
+        icon: "success",
+        title: "Loged in successfully.",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+    }
+  };
   return (
     <>
       <section id="login" className="mx-auto max-w-7xl">
@@ -43,8 +44,8 @@ const Login = () => {
             <Image
               src={loginSvg}
               alt="Login SVG"
-              height={150}
-              width={150}
+              height={460}
+              width={502}
               className="w-full"
             />
           </div>
@@ -57,10 +58,7 @@ const Login = () => {
                 <h3 className="mb-4 text-3xl font-semibold text-center md:mb-8 md:font-bold md:text-4xl">
                   Login
                 </h3>
-                <form
-                  // onSubmit={handleLogin}
-                  className="space-y-5"
-                >
+                <form onSubmit={handleLogin} className="space-y-5">
                   <div className="px-10 form-control">
                     <label className="label">
                       <span className="text-lg font-semibold text-secondary">
@@ -107,18 +105,6 @@ const Login = () => {
                   </div>
                 </form>
                 <SocialLogin />
-                {/* <div className="my-5">
-                  <p className="text-center">Or Sign In with</p>
-                  <div className="flex justify-center gap-5 items-center my-3 text-2xl  [&>*]:p-2 [&>*]:text-blue-600 [&>*]:bg-slate-100 [&>*]:rounded-full">
-                    <FaFacebookF />
-                    <FaLinkedinIn />
-                    <img
-                      src={googleIcon}
-                      alt="google-icon..."
-                      className="h-8"
-                    />
-                  </div>
-                </div> */}
                 <p className="my-3 text-center">
                   {`Don't have any account? `}
                   <Link
@@ -139,74 +125,3 @@ const Login = () => {
 };
 
 export default Login;
-
-{
-  /* <form onSubmit={handleLogin} className="card-body">
-{/* <div className=" form-control">
-    <label className="label">
-      <span className="text-lg font-semibold text-secondary">
-        Email
-      </span>
-    </label>
-    <input
-      type="email"
-      placeholder="Your email"
-      name="email"
-      className="p-3 rounded-sm outline outline-1 outline-secondary focus:outline-2"
-      required
-    />
-  </div>
-  <div className="form-control">
-    <label className="label">
-      <span className="text-lg font-semibold text-secondary">
-        Confirm Password
-      </span>
-    </label>
-    <div className="relative">
-      <input
-        type={showPassword ? "text" : "password"}
-        placeholder="Your password"
-        name="password"
-        className="w-full p-3 rounded-sm outline outline-1 outline-secondary focus:outline-2"
-        required
-      />
-      <span
-        onClick={() => setShowPassword(!showPassword)}
-        className="absolute top-4 right-3"
-      >
-        {showPassword ? (
-          <AiFillEyeInvisible />
-        ) : (
-          <AiFillEye />
-        )}
-      </span>
-    </div>
-  </div> */
-}
-{
-  /* {success && (
-  <p className="text-sm text-gray-700">{success}</p>
-)}
-{error && <p className="text-sm text-red-700">{error}</p>} */
-}
-
-{
-  /* <div className="mt-2">
-  <button
-    // style={{ textShadow: "2px 2px 0 rgba(0.5,0,0,0.5) " }}
-    className="w-full rounded-md btn-fill"
-  >
-    Login
-  </button>
-</div>
-<p className="my-3 text-center">
-  {`Don't have any account? `}
-  <Link
-    to={"/register"}
-    className="text-primary hover:underline"
-  >
-    Register
-  </Link>
-</p>
-</form>  */
-}
