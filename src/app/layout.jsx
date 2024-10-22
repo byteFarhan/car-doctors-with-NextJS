@@ -3,6 +3,7 @@ import "./globals.css";
 import { Inter } from "next/font/google";
 import Navbar from "@/components/Navbar/Navbar";
 import Footer from "@/components/Footer/Footer";
+import AuthProvider from "@/components/AuthProvider/AuthProvider";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -39,11 +40,13 @@ export default function RootLayout({ children }) {
       <head>
         <link rel="icon" href="/assets/logo.svg" />
       </head>
-      <body className={`${inter.className} antialiased`}>
-        <Navbar></Navbar>
-        {children}
-        <Footer></Footer>
-      </body>
+      <AuthProvider>
+        <body className={`${inter.className} antialiased`}>
+          <Navbar></Navbar>
+          {children}
+          <Footer></Footer>
+        </body>
+      </AuthProvider>
     </html>
   );
 }

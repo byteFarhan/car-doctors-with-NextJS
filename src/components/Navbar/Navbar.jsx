@@ -3,49 +3,21 @@ import Image from "next/image";
 import logo from "../../../public/assets/logo.svg";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useSession } from "next-auth/react";
+const navItems = [
+  { routeName: "Home", routePath: "/" },
+  { routeName: "About", routePath: "/about" },
+  { routeName: "Services", routePath: "/services" },
+  { routeName: "Blog", routePath: "/blog" },
+  { routeName: "Contact", routePath: "/contact" },
+  { routeName: "Appointment", routePath: "/appointment", isLgHidden: true },
+  // { routeName: "Login", routePath: "/login", isLgHidden: true },
+];
 const Navbar = () => {
-  const user = true;
-  //   const handleLogout = () => {
-  //     swal({
-  //       title: "Are you sure?",
-  //       text: "You want to logout your account!",
-  //       icon: "warning",
-  //       buttons: true,
-  //       dangerMode: true,
-  //     }).then((willDelete) => {
-  //       if (willDelete) {
-  //         userLogOut()
-  //           .then((result) => {
-  //             swal("Good job!", "Logout Successful!", "success");
-  //           })
-  //           .catch((error) => {
-  //             swal(error.message);
-  //           });
-  //         // swal("Poof! Your imaginary file has been deleted!", {
-  //         //   icon: "success",
-  //         // });
-  //       } else {
-  //         swal("Logout has been Canceled!");
-  //       }
-  //     });
-
-  //     // userLogOut()
-  //     //   .then((result) => {
-  //     //     swal("Good job!", "Logout Successful!", "success");
-  //     //   })
-  //     //   .catch((error) => {
-  //     //     swal(error.message);
-  //     //   });
-  //   };
-  const navItems = [
-    { routeName: "Home", routePath: "/" },
-    { routeName: "About", routePath: "/about" },
-    { routeName: "Services", routePath: "/services" },
-    { routeName: "Blog", routePath: "/blog" },
-    { routeName: "Contact", routePath: "/contact" },
-    { routeName: "Appointment", routePath: "/appointment", isLgHidden: true },
-    // { routeName: "Login", routePath: "/login", isLgHidden: true },
-  ];
+  const session = useSession();
+  // console.log(session);
+  const user = session?.data?.user;
+  // console.log(user);
   const currentPath = usePathname();
   const navLinks = navItems.map((item) => (
     <li key={item.routePath}>
@@ -113,16 +85,17 @@ const Navbar = () => {
               className="avatar online placeholder dropdown dropdown-end"
             >
               <div className="w-12 rounded-full bg-neutral text-neutral-content lg:w-14">
-                <span className="text-xl">AI</span>
+                <span className="text-xl uppercase">
+                  {user.name.split("")[0]}
+                </span>
               </div>
               <ul
                 tabIndex={0}
                 className="dropdown-content menu space-y-2 lg:space-y-3 bg-base-100 rounded-box z-[1] w-52 p-2 shadow"
               >
-                <li>
-                  <a>Item 1</a>
-                </li>
-                <li className="rounded-md hover:bg-black">
+                <li className="text-xs lg:text-sm">{user?.name}</li>
+                <li className="text-xs lg:text-sm">{user?.email}</li>
+                <li className="transition-all duration-100 rounded-md hover:bg-black">
                   <button className="px-3 py-2 font-medium text-white border-transparent rounded-md md:px-4 md:py-3 bg-primary md:block">
                     Logout
                   </button>
