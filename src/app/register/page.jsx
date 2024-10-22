@@ -22,6 +22,7 @@ const Register = () => {
       name,
       email,
       password,
+      role: "member",
     };
     // console.log(newUser);
     const resp = await fetch(

@@ -1,3 +1,4 @@
+import bcrypt from "bcrypt";
 import { connectDB } from "@/lib/connectDB";
 import { NextResponse } from "next/server";
 
@@ -7,6 +8,7 @@ export async function POST(request) {
     const user = await request.json();
     // console.log(user);
     // console.log(user.email);
+    const hashedPass = bcrypt.hashSync(user.password, 14);
     const userCollection = db.collection("users");
     const isUserExist = await userCollection.findOne({ email: user.email });
     console.log(isUserExist);
@@ -15,13 +17,15 @@ export async function POST(request) {
         { message: "User already exist!" },
         { status: 409 }
       );
-    } else {
-      const resp = await userCollection.insertOne(user);
-      return NextResponse.json({
-        message: "User created successfully.",
-        data: resp,
-      });
     }
+    const resp = await userCollection.insertOne({
+      ...user,
+      password: hashedPass,
+    });
+    return NextResponse.json({
+      message: "User created successfully.",
+      data: resp,
+    });
   } catch (error) {
     return NextResponse.json(
       { message: "An error occurred!", error },
