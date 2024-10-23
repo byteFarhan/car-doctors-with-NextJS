@@ -1,6 +1,7 @@
 import { connectDB } from "@/lib/connectDB";
 import NextAuth from "next-auth/next";
 import Credentials from "next-auth/providers/credentials";
+import GoogleProvider from "next-auth/providers/google";
 import bcrypt from "bcrypt";
 
 export const handler = NextAuth({
@@ -28,6 +29,10 @@ export const handler = NextAuth({
         }
         return user;
       },
+    }),
+    GoogleProvider({
+      clientId: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID,
+      clientSecret: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_SECRET,
     }),
   ],
   pages: {

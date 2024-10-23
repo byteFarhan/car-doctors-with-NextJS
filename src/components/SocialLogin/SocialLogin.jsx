@@ -2,6 +2,7 @@
 import { FaFacebookF, FaLinkedinIn } from "react-icons/fa";
 import googleIcon from "@/../public/assets/icons/google-icon.png";
 import Image from "next/image";
+import { signIn } from "next-auth/react";
 // import { useContext } from "react";
 // import { AuthContext } from "../../../Providers/AuthProvider";
 // import swal from "sweetalert";
@@ -45,9 +46,7 @@ const SocialLogin = () => {
       <div className="my-5">
         <p className="mb-3 text-center">Or Sign In with</p>
         <ul className="flex justify-center *:cursor-pointer gap-5 items-center my-3 text-2xl  [&>*]:p-2 [&>*]:text-blue-600 [&>*]:bg-slate-100 [&>*]:rounded-full">
-          <li
-          //   onClick={handleGoogleLogin}
-          >
+          <li onClick={() => signIn("google", { redirect: false })}>
             <Image
               src={googleIcon}
               alt="google-icon..."
