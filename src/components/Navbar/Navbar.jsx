@@ -78,7 +78,7 @@ const Navbar = () => {
             Login
           </Link>
         ) : (
-          <div className="">
+          <div className="md:mr-4">
             <div
               tabIndex={0}
               role="button"
@@ -86,15 +86,33 @@ const Navbar = () => {
             >
               <div className="w-12 rounded-full bg-neutral text-neutral-content lg:w-14">
                 <span className="text-xl uppercase">
-                  {user.name.split("")[0]}
+                  {user?.name?.split("")[0]}
                 </span>
               </div>
               <ul
                 tabIndex={0}
                 className="dropdown-content menu space-y-2 lg:space-y-3 bg-base-100 rounded-box z-[1] w-52 p-2 shadow"
               >
-                <li className="text-xs lg:text-sm">{user?.name}</li>
-                <li className="text-xs lg:text-sm">{user?.email}</li>
+                <li
+                  className={`text-xs lg:text-sm ${
+                    user?.name?.length > 20 &&
+                    "tooltip tooltip-left md:tooltip-bottom"
+                  }`}
+                  data-tip={user?.name.length > 20 && user?.name}
+                >
+                  {user?.name.slice(0, 20)}
+                  {user.name.length > 20 && "..."}
+                </li>
+                <li
+                  className={`text-xs lg:text-sm ${
+                    user?.email?.length > 20 &&
+                    "tooltip tooltip-left md:tooltip-bottom"
+                  }`}
+                  data-tip={user?.email.length > 20 && user?.email}
+                >
+                  {user?.email.slice(0, 20)}
+                  {user.email.length > 20 && "..."}
+                </li>
                 <li className="transition-all duration-100 rounded-md hover:bg-black">
                   <button
                     onClick={() => signOut({ redirect: false })}
@@ -108,7 +126,7 @@ const Navbar = () => {
           </div>
         )}
 
-        <Link href={"/appointment"} className="hidden md:block md:ml-4">
+        <Link href={"/appointment"} className="hidden md:block">
           <button className="btn-transparent btn-transparent-red">
             Appointment
           </button>
