@@ -55,9 +55,7 @@ const SocialLogin = () => {
               height={24}
             />
           </li>
-          <li
-          //   onClick={handleFacebookLogin}
-          >
+          <li onClick={() => signIn("facebook")}>
             <FaFacebookF />
           </li>
           <li
