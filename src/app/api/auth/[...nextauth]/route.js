@@ -44,6 +44,34 @@ export const handler = NextAuth({
     signIn: "/login",
   },
   callbacks: {
+    async signIn({ user, account, profile }) {
+      const provider = account.provider;
+      if (
+        provider === "google" ||
+        provider === "facebook" ||
+        provider === "linkedin" ||
+        provider === "github"
+      ) {
+        try {
+          const db = await connectDB();
+          const isUserExist = await db
+            .collection("users")
+            .findOne({ email: user?.email });
+          //   console.log("isUserExist", isUserExist);
+          if (!isUserExist) {
+            const resp = await db.collection("users").insertOne(user);
+            // console.log(resp);
+            return user;
+          } else {
+            return user;
+          }
+        } catch (error) {
+          console.error("Error saving user to MongoDB", error);
+          return false; // Reject login on error
+        }
+      }
+      return user;
+    },
     async jwt({ token, account, user }) {
       // Persist the OAuth access_token and or the user id to the token right after signin
       if (account) {
