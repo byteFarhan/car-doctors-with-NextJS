@@ -1,8 +1,9 @@
 import Image from "next/image";
 import React from "react";
 import PropTypes from "prop-types";
+import titleBG from "@/../public/assets/images/checkout/checkout.png";
 
-const PageTitle = ({ title, pagePath, titleBG }) => {
+const PageTitle = ({ title, pagePath }) => {
   return (
     <>
       <section className="mt-6 mb-16 md:mb-20 lg:mt-10 lg:mb-32">

@@ -19,7 +19,7 @@
     @apply text-xl font-bold text-secondary;
   }
   p {
-    @apply text-base capitalize text-neutral;
+    @apply text-base capitalize text-neutral leading-[30px];
   }
 }
 
@@ -29,7 +29,7 @@
     @apply px-5 py-2 text-lg font-semibold text-white transition-transform duration-100 rounded-sm focus:outline-none hover:scale-95;
   }
   .btn-fill {
-    @apply px-3 text-white border-none rounded lg:px-5 lg:text-lg btn bg-primary focus:border-none hover:bg-primary;
+    @apply px-3 text-white border-none rounded lg:px-5 lg:text-lg btn bg-primary focus:border-none hover:bg-primary focus:outline-none;
   }
   .btn-transparent {
     @apply px-3 bg-transparent lg:text-lg lg:px-5 btn btn-outline hover:bg-transparent;
