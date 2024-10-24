@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import { GoArrowRight } from "react-icons/go";
 
 const ServiceCard = ({ service }) => {
-  const { img, title, price, service_id } = service;
+  const { img, title, price, _id } = service;
   return (
     <>
       <div className="p-6 space-y-4 rounded-md shadow">
@@ -20,7 +20,7 @@ const ServiceCard = ({ service }) => {
         <div className="flex justify-between pb-4">
           <p className="text-xl font-semibold text-primary">Price: ${price}</p>
           <p className="text-3xl font-semibold text-primary">
-            <Link href={"#"}>
+            <Link href={`/services/${_id}`}>
               <GoArrowRight />
             </Link>
           </p>
