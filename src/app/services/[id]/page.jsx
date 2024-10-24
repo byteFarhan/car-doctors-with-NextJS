@@ -1,4 +1,7 @@
+import Image from "next/image";
 import React from "react";
+import titleBG from "@/../public/assets/images/checkout/checkout.png";
+import PageTitle from "@/components/PageTitle/PageTitle";
 
 const ServiceDetails = async ({ params }) => {
   const resp = await fetch(
@@ -6,7 +9,16 @@ const ServiceDetails = async ({ params }) => {
   );
   const service = await resp.json();
   // console.log(service);
-  return <div></div>;
+  const { title, img, description, price, facility } = service;
+  return (
+    <section className="container">
+      <PageTitle
+        title="Service Details"
+        pagePath="Home/Service Details"
+        titleBG={titleBG}
+      />
+    </section>
+  );
 };
 
 export default ServiceDetails;
