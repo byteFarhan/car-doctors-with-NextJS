@@ -5,7 +5,7 @@ import GoogleProvider from "next-auth/providers/google";
 import FacebookProvider from "next-auth/providers/facebook";
 import bcrypt from "bcrypt";
 
-export const handler = NextAuth({
+export const authOptions = {
   secret: process.env.NEXT_PUBLIC_AUTH_SECRET,
   session: {
     strategy: "jwt",
@@ -84,5 +84,7 @@ export const handler = NextAuth({
       return session;
     },
   },
-});
+};
+
+export const handler = NextAuth(authOptions);
 export { handler as GET, handler as POST };

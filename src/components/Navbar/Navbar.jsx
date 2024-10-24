@@ -93,7 +93,7 @@ const Navbar = () => {
                 tabIndex={0}
                 className="dropdown-content menu space-y-2 lg:space-y-3 bg-base-100 rounded-box z-[1] w-52 p-2 shadow"
               >
-                {/* <li
+                <li
                   className={`text-xs lg:text-sm ${
                     user?.name?.length > 20 &&
                     "tooltip tooltip-left md:tooltip-bottom"
@@ -102,8 +102,8 @@ const Navbar = () => {
                 >
                   {user?.name.slice(0, 20)}
                   {user.name.length > 20 && "..."}
-                </li> */}
-                <li className="text-xs lg:text-sm">{user?.name}</li>
+                </li>
+                {/* <li className="text-xs lg:text-sm">{user?.name}</li> */}
                 <li
                   className={`text-xs lg:text-sm ${
                     user?.email?.length > 20 &&

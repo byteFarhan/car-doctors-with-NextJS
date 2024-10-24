@@ -8,11 +8,7 @@ const Footer = () => {
       <div className="container footer">
         <aside className="[&>*]:max-w-[200px] lg:[&>*]:max-w-[250px]">
           <Image src={logo} alt="logo..." />
-          {/* <p>
-          ACME Industries Ltd.
-          <br />
-          Providing reliable tech since 1992
-        </p> */}
+          <h4 className="mb-3 text-sm font-bold text-white">Car Doctors</h4>
           <p className="text-[#E8E8E8]">
             Edwin Diaz is a software and web technologies engineer, a life coach
             trainer who is also a serial.
