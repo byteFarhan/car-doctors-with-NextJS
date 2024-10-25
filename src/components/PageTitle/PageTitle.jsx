@@ -1,9 +1,8 @@
 import Image from "next/image";
 import React from "react";
 import PropTypes from "prop-types";
-import titleBG from "@/../public/assets/images/checkout/checkout.png";
 
-const PageTitle = ({ title, pagePath }) => {
+const PageTitle = ({ title, pagePath, titleBG }) => {
   return (
     <>
       <section className="mt-6 mb-16 md:mb-20 lg:mt-10 lg:mb-32">
@@ -28,8 +27,6 @@ const PageTitle = ({ title, pagePath }) => {
             </div>
           </div>
         </div>
-        {/* clip-path: polygon(13% 80%, 88% 81%, 100% 100%, 0% 100%); */}
-        {/* [clip-path:polygon(13%_80%,_88%_81%,_100%_100%,_0%_100%)]  */}
       </section>
     </>
   );

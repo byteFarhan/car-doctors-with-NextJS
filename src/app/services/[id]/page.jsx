@@ -1,7 +1,7 @@
 import Image from "next/image";
 import React from "react";
 import { HiOutlineDocumentChartBar } from "react-icons/hi2";
-// import titleBG from "@/../public/assets/images/checkout/checkout.png";
+import titleBG from "@/../public/assets/images/checkout/checkout.png";
 // import thumbImg from "@/../public/assets/images/banner/2.jpg";
 import playImg from "@/../public/assets/icons/play.svg";
 import logo from "@/../public/assets/logo.svg";
@@ -28,7 +28,7 @@ const ServiceDetails = async ({ params }) => {
       <PageTitle
         title="Service Details"
         pagePath="Home/Service Details"
-        // titleBG={titleBG}
+        titleBG={titleBG}
       />
       <section className="gap-6 mb-16 md:mb-20 lg:mb-32 lg:grid lg:grid-cols-3">
         <div className="lg:col-span-2">
@@ -58,7 +58,7 @@ const ServiceDetails = async ({ params }) => {
               {steps?.map((item, idx) => (
                 <div key={idx}>
                   <div className="px-4 md:px-8 py-6 md:py-10 space-y-3 md:space-y-5 text-center rounded-lg border border-[#E8E8E8]">
-                    <span className="flex items-center justify-center rounded-full size-[70px] mx-auto bg-primary border-[10px] border-[#F3F3F3]">
+                    <span className="flex items-center justify-center rounded-full size-[70px] mx-auto bg-primary border-[10px] border-light-gray">
                       <p className="text-xl font-bold text-white">{`0${
                         idx + 1
                       }`}</p>
@@ -88,9 +88,9 @@ const ServiceDetails = async ({ params }) => {
           </div>
         </div>
         <div className="mt-8 space-y-8 lg:col-span-1 lg:mt-0">
-          <div className="bg-[#F3F3F3] p-8 rounded-lg space-y-5">
+          <div className="p-8 space-y-5 rounded-lg bg-light-gray">
             <h4>Other Services</h4>
-            {filteredServices?.map((service) => (
+            {filteredServices?.slice(0, 5).map((service) => (
               <Link
                 key={service._id}
                 href={`/services/${service._id}`}
