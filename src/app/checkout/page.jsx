@@ -1,14 +1,17 @@
 "use client";
 import PageTitle from "@/components/PageTitle/PageTitle";
 import titleBG from "@/../public/assets/images/checkout/checkout.png";
-import React from "react";
+import React, { useState } from "react";
 import InputField from "@/components/InputField/InputField";
 import { useSession } from "next-auth/react";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 const Checkout = () => {
+  const [selectedDate, setSelectedDate] = useState(new Date());
   const session = useSession();
   const user = session?.data?.user;
-
+  console.log(selectedDate);
   return (
     <section className="container">
       <PageTitle title="Check Out" pagePath="Home/Checkout" titleBG={titleBG} />
@@ -25,13 +28,23 @@ const Checkout = () => {
                 defaultValue={"Service Name"}
                 isReadOnly={true}
               />
-              <InputField
-                placeholder="Select Date"
-                type="date"
-                name="date"
-                isLabelHidden={true}
-                isRequired={true}
-              />
+              <div className="form-control">
+                <DatePicker
+                  selected={selectedDate}
+                  onChange={(date) => setSelectedDate(date)}
+                  filterDate={(date) =>
+                    date.getDay() !== 6 && date.getDay() !== 0
+                  }
+                  minDate={new Date()}
+                  //   maxDate={(date) => date.setFullYear(date.getFullYear() + 1)}
+                  dateFormat={"dd/MM/yyyy"}
+                  isClearable
+                  showYearDropdown
+                  scrollableMonthYearDropdown
+                  placeholderText="Select Date"
+                  className="w-full p-3 text-sm rounded-lg md:text-base outline-secondary focus:outline-1"
+                />
+              </div>
               <InputField
                 placeholder="Your Email"
                 type="email"
@@ -49,7 +62,7 @@ const Checkout = () => {
                 isRequired={true}
                 pattern="\d*"
               />
-              <div className="w-full form-control lg:col-span-2">
+              <div className="form-control lg:col-span-2">
                 <textarea
                   className="p-3 rounded-lg outline-secondary focus:outline-1"
                   name="massage"
