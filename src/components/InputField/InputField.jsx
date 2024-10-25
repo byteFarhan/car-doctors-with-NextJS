@@ -8,9 +8,12 @@ const InputField = ({
   name,
   isRequired,
   type,
+  defaultValue,
+  isReadOnly,
+  pattern,
 }) => {
   return (
-    <div className="px-10 form-control">
+    <div className="form-control">
       {!isLabelHidden && (
         <label className="label">
           <span className="text-lg font-semibold text-secondary">{label}</span>
@@ -20,8 +23,11 @@ const InputField = ({
         type={type}
         placeholder={placeholder}
         name={name}
-        className="p-3 rounded-lg outline-secondary focus:outline-1"
+        className="p-3 text-sm rounded-lg md:text-base outline-secondary focus:outline-1"
         required={isRequired ? true : false}
+        defaultValue={defaultValue}
+        readOnly={isReadOnly ? true : false}
+        pattern={pattern && pattern}
       />
     </div>
   );
@@ -31,8 +37,11 @@ export default InputField;
 InputField.propTypes = {
   label: PropTypes.string,
   placeholder: PropTypes.string.isRequired,
+  defaultValue: PropTypes.string,
   name: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
+  pattern: PropTypes.string,
   isRequired: PropTypes.bool,
   isLabelHidden: PropTypes.bool,
+  isReadOnly: PropTypes.bool,
 };
