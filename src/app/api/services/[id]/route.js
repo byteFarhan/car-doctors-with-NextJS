@@ -3,7 +3,7 @@ import { ObjectId } from "mongodb";
 import { NextResponse } from "next/server";
 
 export const GET = async (request, { params }) => {
-  console.log(request);
+  // console.log(request);
   const db = await connectDB();
   try {
     const resp = await db

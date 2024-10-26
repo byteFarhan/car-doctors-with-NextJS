@@ -22,6 +22,7 @@ export async function POST(request) {
       ...user,
       password: hashedPass,
     });
+    console.log(resp);
     return NextResponse.json({
       message: "User created successfully.",
       data: resp,

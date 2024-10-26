@@ -10,6 +10,7 @@ import Facility from "@/components/Facility/Facility";
 import getTopServices from "@/lib/getTopServices";
 import Link from "next/link";
 import { GoArrowRight } from "react-icons/go";
+import { getService } from "@/lib/getService";
 
 const ServiceDetails = async ({ params }) => {
   const topServices = await getTopServices();
@@ -17,10 +18,7 @@ const ServiceDetails = async ({ params }) => {
     (service) => service._id !== params.id
   );
   // console.log(filteredServices.length);
-  const resp = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/api/services/${params.id}`
-  );
-  const service = await resp.json();
+  const service = await getService(params?.id);
   // console.log(service);
   const { title, img, description, price, facility } = service;
   return (
@@ -157,7 +155,10 @@ const ServiceDetails = async ({ params }) => {
           {/* <div> */}
           <h3>Price ${price}</h3>
           {/* </div> */}
-          <Link href={"#"} className="w-full btn-fill">
+          <Link
+            href={`/checkout/service/${params.id}`}
+            className="w-full btn-fill"
+          >
             Proceed Checkout
           </Link>
         </div>

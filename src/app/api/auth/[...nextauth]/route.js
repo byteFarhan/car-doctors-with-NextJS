@@ -1,5 +1,6 @@
+import NextAuth from "next-auth";
+
 import { connectDB } from "@/lib/connectDB";
-import NextAuth from "next-auth/next";
 import Credentials from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
 import FacebookProvider from "next-auth/providers/facebook";
@@ -59,7 +60,10 @@ export const authOptions = {
             .findOne({ email: user?.email });
           //   console.log("isUserExist", isUserExist);
           if (!isUserExist) {
-            const resp = await db.collection("users").insertOne(user);
+            const resp = await db.collection("users").insertOne({
+              ...user,
+              role: "user",
+            });
             // console.log(resp);
             return user;
           } else {
@@ -75,12 +79,14 @@ export const authOptions = {
     async jwt({ token, account, user }) {
       // Persist the OAuth access_token and or the user id to the token right after signin
       if (account) {
-        token.role = user.role;
+        // console.log("user:--", user);
+        token.role = user?.role || "user";
       }
       return token;
     },
     async session({ session, token }) {
-      session.user.role = token.role;
+      // console.log("token:-", token);
+      session.user.role = token?.role || "user";
       return session;
     },
   },

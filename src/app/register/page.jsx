@@ -22,7 +22,7 @@ const Register = () => {
       name,
       email,
       password,
-      role: "member",
+      role: "user",
       image: "https://i.postimg.cc/ZnVNXs38/2.jpg",
     };
     // console.log(newUser);
