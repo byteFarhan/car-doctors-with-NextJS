@@ -5,8 +5,11 @@ import { getService } from "@/lib/getService";
 import CheckoutForm from "@/components/CheckoutForm/CheckoutForm";
 import { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
+import Swal from "sweetalert2";
+import { useRouter } from "next/navigation";
 
 const Checkout = ({ params }) => {
+  const router = useRouter();
   const [service, setService] = useState({});
   const session = useSession();
   //   console.log("session", session);
@@ -16,8 +19,61 @@ const Checkout = ({ params }) => {
   }, [params]);
   //   console.log(service);
   //   console.log("user", user);
-  const handleCheckout = (e) => {
+  const handleCheckout = async (e) => {
     e.preventDefault();
+    const form = e.target;
+    // console.log(form);
+    const date = form.date.value;
+    const service = form.service.value;
+    const email = form.email.value;
+    const phone = form.phone.value;
+    const userMessage = form.message.value;
+    // console.log("date", date);
+    const checkoutData = {
+      dateBooked: date.split("/").join("-"),
+      service,
+      serviceId: params?.id,
+      userMessage,
+      userInfo: {
+        name: user?.name,
+        email,
+        phone,
+      },
+    };
+    // console.log(checkoutData);
+    try {
+      const resp = await fetch(
+        `${process.env.NEXT_PUBLIC_API_URL}/api/booking-service`,
+        {
+          method: "POST",
+          body: JSON.stringify(checkoutData),
+          headers: {
+            "content-type": "application/json",
+          },
+        }
+      );
+      //   console.log(await resp.json());
+      if (resp.ok && resp.status === 200) {
+        form.reset();
+        router.push("/");
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "Booking successfull.🎉",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      }
+    } catch (error) {
+      console.log(error);
+      Swal.fire({
+        position: "top-end",
+        icon: "error",
+        title: error?.message,
+        showConfirmButton: false,
+        timer: 1500,
+      });
+    }
   };
   return (
     <section className="container">
