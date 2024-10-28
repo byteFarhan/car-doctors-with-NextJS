@@ -1,7 +1,6 @@
+"use client";
 import PageTitle from "@/components/PageTitle/PageTitle";
 import titleBG from "@/../public/assets/images/checkout/checkout.png";
-
-import React from "react";
 
 const MyBookings = () => {
   return (
