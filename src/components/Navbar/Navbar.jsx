@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import { signOut, useSession } from "next-auth/react";
 const navItems = [
   { routeName: "Home", routePath: "/" },
+  { routeName: "My Bookings", routePath: "/my-bookings" },
   { routeName: "About", routePath: "/about" },
   { routeName: "Services", routePath: "/services" },
   { routeName: "Blog", routePath: "/blog" },
