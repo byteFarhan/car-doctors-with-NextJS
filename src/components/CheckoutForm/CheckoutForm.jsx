@@ -30,6 +30,7 @@ const CheckoutForm = ({ handlerFunc, serviceName, userEmail }) => {
               //   maxDate={(date) => date.setFullYear(date.getFullYear() + 1)}
               dateFormat={"dd/MM/yyyy"}
               isClearable
+              required
               placeholderText="Select Date"
               className="w-full p-3 text-sm rounded-lg md:text-base outline-secondary focus:outline-1"
             />

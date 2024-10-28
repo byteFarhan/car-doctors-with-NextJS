@@ -30,7 +30,7 @@ const Checkout = ({ params }) => {
     const userMessage = form.message.value;
     // console.log("date", date);
     const checkoutData = {
-      dateBooked: date.split("/").join("-"),
+      dateBooked: date,
       service,
       serviceId: params?.id,
       userMessage,
