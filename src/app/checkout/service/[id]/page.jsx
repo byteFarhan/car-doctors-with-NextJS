@@ -24,23 +24,22 @@ const Checkout = ({ params }) => {
     const form = e.target;
     // console.log(form);
     const date = form.date.value;
-    const service = form.service.value;
+    // const serviceName = form.service.value;
     const email = form.email.value;
     const phone = form.phone.value;
     const userMessage = form.message.value;
     // console.log("date", date);
     const checkoutData = {
       dateBooked: date,
-      service,
-      serviceId: params?.id,
       userMessage,
       userInfo: {
         name: user?.name,
         email,
         phone,
       },
+      serviceInfo: service,
     };
-    // console.log(checkoutData);
+    console.log(checkoutData);
     try {
       const resp = await fetch(
         `${process.env.NEXT_PUBLIC_API_URL}/api/booking-service`,
