@@ -31,6 +31,7 @@ const Checkout = ({ params }) => {
     // console.log("date", date);
     const checkoutData = {
       dateBooked: date,
+      bookingStatus: "panding",
       userMessage,
       userInfo: {
         name: user?.name,

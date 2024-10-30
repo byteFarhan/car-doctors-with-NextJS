@@ -44,7 +44,7 @@ const MyBookings = () => {
         isPathLeft={true}
         titleBG={titleBG}
       />
-      <section>
+      <section className="grid grid-cols-1 gap-6 my-16 space-y-6 md:my-20 lg:my-32 md:grid-cols-2 lg:grid-cols-1">
         {bookings.length > 0 &&
           bookings?.map((booking) => (
             <BookingCard key={booking._id} booking={booking} />
@@ -56,20 +56,49 @@ const MyBookings = () => {
 
 export default MyBookings;
 
-const BookingCard = ({ booking }) => {
-  const { userInfo, bookedDate, serviceInfo } = booking;
+export const BookingCard = ({ booking }) => {
+  const { userInfo, dateBooked, serviceInfo, bookingStatus } = booking;
   return (
-    <div key={booking._id}>
-      <button className="">
-        <MdCancel className="text-4xl" />
-      </button>
-      <div>
+    <div className="flex flex-col justify-between gap-4 md:gap-4 lg:flex-row lg:items-center lg:gap-7">
+      <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:gap-7">
+        <button className="hidden lg:block">
+          <MdCancel className="text-4xl" />
+        </button>
         <Image
           src={serviceInfo.img}
-          width={250}
-          height={250}
+          width={150}
+          height={150}
           alt={serviceInfo.title}
+          className="lg:size-[150px] w-full rounded-lg object-cover max-h-[200px]"
         />
+        <div>
+          <h4 className="font-semibold">{serviceInfo.title}</h4>
+          <div className="flex gap-4 lg:flex-col lg:gap-1">
+            <p>Color : Green</p>
+            <p>Size: S</p>
+          </div>
+        </div>
+      </div>
+      <h4 className="hidden text-lg lg:block md:font-medium lg:font-semibold lg:text-xl">
+        ${serviceInfo.price}
+      </h4>
+      <h4 className="hidden text-lg font-medium lg:block md:font-medium lg:font-semibold lg:text-xl">
+        {dateBooked.split("/").join("-")}
+      </h4>
+
+      <div className="flex gap-6 lg:hidden">
+        <h4 className="text-lg font-medium lg:font-semibold lg:text-xl">
+          ${serviceInfo.price}
+        </h4>
+        <h4 className="text-lg font-medium lg:font-semibold lg:text-xl">
+          {dateBooked.split("/").join("-")}
+        </h4>
+      </div>
+      <div className="flex justify-between gap-4 *:flex-1">
+        <button className="capitalize btn-fill">{bookingStatus}</button>
+        <button className="block text-black lg:hidden btn-transparent btn-transparent-gray">
+          Cancel
+        </button>
       </div>
     </div>
   );
