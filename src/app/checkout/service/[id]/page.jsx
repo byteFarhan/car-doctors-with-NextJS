@@ -40,7 +40,7 @@ const Checkout = ({ params }) => {
       },
       serviceInfo: service,
     };
-    console.log(checkoutData);
+    // console.log(checkoutData);
     try {
       const resp = await fetch(
         `${process.env.NEXT_PUBLIC_API_URL}/api/booking-service`,
@@ -55,7 +55,7 @@ const Checkout = ({ params }) => {
       //   console.log(await resp.json());
       if (resp.ok && resp.status === 200) {
         form.reset();
-        router.push("/");
+        router.push("/my-bookings");
         Swal.fire({
           position: "top-end",
           icon: "success",

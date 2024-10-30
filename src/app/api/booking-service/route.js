@@ -1,4 +1,5 @@
 import { connectDB } from "@/lib/connectDB";
+import { ObjectId } from "mongodb";
 import { NextResponse } from "next/server";
 
 export const POST = async (request) => {
@@ -25,6 +26,23 @@ export const GET = async (request) => {
       .collection("bookings")
       .find({ "userInfo.email": email })
       .toArray();
+    return NextResponse.json(resp);
+  } catch (error) {
+    return NextResponse.json(
+      { message: "Internal server error!", error },
+      { status: 500 }
+    );
+  }
+};
+
+export const DELETE = async (request) => {
+  const db = await connectDB();
+  try {
+    const serviceId = request.nextUrl.searchParams.get("_delete-service");
+    // console.log(serviceId);
+    const resp = await db
+      .collection("bookings")
+      .deleteOne({ _id: new ObjectId(serviceId) });
     return NextResponse.json(resp);
   } catch (error) {
     return NextResponse.json(

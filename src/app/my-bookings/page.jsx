@@ -6,31 +6,31 @@ import { MdCancel } from "react-icons/md";
 import React, { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
+import Link from "next/link";
+import Swal from "sweetalert2";
 
 const MyBookings = () => {
   const [bookings, setBookings] = useState([]);
   const session = useSession();
   const user = session?.data?.user;
+  const fetchBookings = async () => {
+    try {
+      const resp = await fetch(
+        `${process.env.NEXT_PUBLIC_API_URL}/api/booking-service?_email=${user?.email}`
+      );
 
-  useEffect(() => {
-    const fetchBookings = async () => {
-      try {
-        const resp = await fetch(
-          `${process.env.NEXT_PUBLIC_API_URL}/api/booking-service?_email=${user?.email}`
-        );
-
-        if (!resp.ok) {
-          throw new Error("Network response was not ok");
-        }
-
-        const data = await resp.json();
-        // console.log(data);
-        setBookings(data);
-      } catch (error) {
-        console.error("Error fetching bookings:", error);
+      if (!resp.ok) {
+        throw new Error("Network response was not ok");
       }
-    };
 
+      const data = await resp.json();
+      // console.log(data);
+      setBookings(data);
+    } catch (error) {
+      console.error("Error fetching bookings:", error);
+    }
+  };
+  useEffect(() => {
     if (user?.email) {
       fetchBookings();
     }
@@ -45,10 +45,19 @@ const MyBookings = () => {
         titleBG={titleBG}
       />
       <section className="grid grid-cols-1 gap-6 my-16 space-y-6 md:my-20 lg:my-32 md:grid-cols-2 lg:grid-cols-1">
-        {bookings.length > 0 &&
+        {bookings.length > 0 ? (
           bookings?.map((booking) => (
-            <BookingCard key={booking._id} booking={booking} />
-          ))}
+            <BookingCard
+              key={booking._id}
+              booking={booking}
+              fetchBookings={fetchBookings}
+            />
+          ))
+        ) : (
+          <div className="flex items-center justify-center w-full h-40 text-center md:col-span-2">
+            <h3 className="capitalize">Not booked any service yet!</h3>
+          </div>
+        )}
       </section>
     </section>
   );
@@ -56,23 +65,64 @@ const MyBookings = () => {
 
 export default MyBookings;
 
-export const BookingCard = ({ booking }) => {
-  const { userInfo, dateBooked, serviceInfo, bookingStatus } = booking;
+export const BookingCard = ({ booking, fetchBookings }) => {
+  const { userInfo, _id, dateBooked, serviceInfo, bookingStatus } = booking;
+  const handleDelete = async (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert the booking!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          const resp = await fetch(
+            `${process.env.NEXT_PUBLIC_API_URL}/api/booking-service?_delete-service=${id}`,
+            {
+              method: "DELETE",
+            }
+          );
+          const { deletedCount } = await resp.json();
+          //   console.log(data);
+          //   console.log(deletedCount);
+          if (deletedCount) {
+            fetchBookings();
+            Swal.fire({
+              position: "top-end",
+              icon: "success",
+              title: "Booking has been canceled.",
+              showConfirmButton: false,
+              timer: 1500,
+            });
+          }
+        } catch (error) {
+          console.log(error);
+        }
+      }
+    });
+  };
   return (
     <div className="flex flex-col justify-between gap-4 md:gap-4 lg:flex-row lg:items-center lg:gap-7">
       <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:gap-7">
-        <button className="hidden lg:block">
+        <button onClick={() => handleDelete(_id)} className="hidden lg:block">
           <MdCancel className="text-4xl" />
         </button>
-        <Image
-          src={serviceInfo.img}
-          width={150}
-          height={150}
-          alt={serviceInfo.title}
-          className="lg:size-[150px] w-full rounded-lg object-cover max-h-[200px]"
-        />
+        <Link href={`/services/${serviceInfo._id}`}>
+          <Image
+            src={serviceInfo.img}
+            width={150}
+            height={150}
+            alt={serviceInfo.title}
+            className="lg:size-[150px] w-full rounded-lg object-cover max-h-[200px]"
+          />
+        </Link>
         <div>
-          <h4 className="font-semibold">{serviceInfo.title}</h4>
+          <Link href={`/services/${serviceInfo._id}`}>
+            <h4 className="font-semibold">{serviceInfo.title}</h4>
+          </Link>
           <div className="flex gap-4 lg:flex-col lg:gap-1">
             <p>Color : Green</p>
             <p>Size: S</p>
@@ -96,7 +146,10 @@ export const BookingCard = ({ booking }) => {
       </div>
       <div className="flex justify-between gap-4 *:flex-1">
         <button className="capitalize btn-fill">{bookingStatus}</button>
-        <button className="block text-black lg:hidden btn-transparent btn-transparent-gray">
+        <button
+          onClick={() => handleDelete(_id)}
+          className="block text-black lg:hidden btn-transparent btn-transparent-gray"
+        >
           Cancel
         </button>
       </div>
