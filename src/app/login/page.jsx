@@ -69,6 +69,7 @@ const Login = () => {
                       type="email"
                       placeholder="Your email"
                       name="email"
+                      defaultValue={"admin@gmail.com"}
                       className="p-3 rounded-md outline outline-1 outline-secondary focus:outline-2"
                       required
                     />
@@ -76,7 +77,7 @@ const Login = () => {
                   <div className="px-10 form-control">
                     <label className="label">
                       <span className="text-lg font-semibold text-secondary">
-                        Confirm Password
+                        Password
                       </span>
                     </label>
                     <div className="relative">
@@ -84,6 +85,7 @@ const Login = () => {
                         type={showPassword ? "text" : "password"}
                         placeholder="Your password"
                         name="password"
+                        defaultValue={"@secret"}
                         className="w-full p-3 rounded-md outline outline-1 outline-secondary focus:outline-2"
                         required
                       />

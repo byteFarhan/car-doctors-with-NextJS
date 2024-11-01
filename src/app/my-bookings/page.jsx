@@ -66,7 +66,7 @@ const MyBookings = () => {
 export default MyBookings;
 
 export const BookingCard = ({ booking, fetchBookings }) => {
-  const { userInfo, _id, dateBooked, serviceInfo, bookingStatus } = booking;
+  const { userInfo, _id, dateBooked, serviceInfo, isAccepted } = booking;
   const handleDelete = async (id) => {
     Swal.fire({
       title: "Are you sure?",
@@ -145,7 +145,13 @@ export const BookingCard = ({ booking, fetchBookings }) => {
         </h4>
       </div>
       <div className="flex justify-between gap-4 *:flex-1">
-        <button className="capitalize btn-fill">{bookingStatus}</button>
+        {isAccepted ? (
+          <button className="text-[#444] hover:text-[#444] capitalize btn-transparent btn-transparent-gray">
+            {"Accepted"}
+          </button>
+        ) : (
+          <button className="capitalize btn-fill">{"Pending"}</button>
+        )}
         <button
           onClick={() => handleDelete(_id)}
           className="block text-black lg:hidden btn-transparent btn-transparent-gray"
