@@ -1,6 +1,7 @@
 "use client";
 import PageTitle from "@/components/PageTitle/PageTitle";
 import titleBG from "@/../public/assets/images/checkout/checkout.png";
+import { PiArrowBendUpLeftLight } from "react-icons/pi";
 import { MdCancel } from "react-icons/md";
 
 import React, { useEffect, useState } from "react";
