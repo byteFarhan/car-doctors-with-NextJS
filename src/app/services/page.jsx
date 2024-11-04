@@ -10,6 +10,9 @@ const Services = () => {
         pagePath="Home/Services"
         titleBG={titleBG}
       />
+      <section>
+        <div>{/* There will add search and filter fields */}</div>
+      </section>
     </section>
   );
 };
