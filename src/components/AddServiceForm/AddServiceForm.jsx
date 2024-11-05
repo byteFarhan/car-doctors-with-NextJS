@@ -1,10 +1,9 @@
 "use client";
-import React, { useState } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import InputField from "../InputField/InputField";
 
 const AddServiceForm = ({ handlerFunc, authorEmail }) => {
-  //   const [selectedDate, setSelectedDate] = useState(new Date());
   return (
     <>
       <form onSubmit={handlerFunc} className="space-y-6">
@@ -22,7 +21,7 @@ const AddServiceForm = ({ handlerFunc, authorEmail }) => {
             name="email"
             isLabelHidden={true}
             isRequired={true}
-            // defaultValue={authorEmail}
+            defaultValue={authorEmail}
             isReadOnly={true}
           />
           <InputField
@@ -61,7 +60,6 @@ const AddServiceForm = ({ handlerFunc, authorEmail }) => {
 
 export default AddServiceForm;
 AddServiceForm.propTypes = {
-  //   serviceName: PropTypes.string.isRequired,
-  //   userEmail: PropTypes.string.isRequired,
-  //   handlerFunc: PropTypes.func.isRequired,
+  userEmail: PropTypes.string.isRequired,
+  handlerFunc: PropTypes.func.isRequired,
 };
