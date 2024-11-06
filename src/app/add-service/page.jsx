@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import titleBG from "@/../public/assets/images/checkout/checkout.png";
 import PageTitle from "@/components/PageTitle/PageTitle";

@@ -60,6 +60,6 @@ const AddServiceForm = ({ handlerFunc, authorEmail }) => {
 
 export default AddServiceForm;
 AddServiceForm.propTypes = {
-  userEmail: PropTypes.string.isRequired,
+  // userEmail: PropTypes.string.isRequired,
   handlerFunc: PropTypes.func.isRequired,
 };
