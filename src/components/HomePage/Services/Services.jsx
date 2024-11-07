@@ -1,5 +1,5 @@
 import SectionIntro from "@/components/SectionIntro/SectionIntro";
-import ServiceCard from "./ServiceCard/ServiceCard";
+import ServiceCard from "../../ServiceCard/ServiceCard";
 import getTopServices from "@/lib/getTopServices";
 import Link from "next/link";
 

@@ -60,7 +60,7 @@ const AddService = () => {
       const { acknowledged, insertedId } = await resp.json();
       if (acknowledged) {
         form.reset();
-        router.push("/");
+        router.push("/services");
         Swal.fire({
           position: "top-end",
           icon: "success",
