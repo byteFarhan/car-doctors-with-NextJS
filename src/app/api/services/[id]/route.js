@@ -7,7 +7,7 @@ export const GET = async (request, { params }) => {
   const db = await connectDB();
   try {
     const resp = await db
-      .collection("top-services")
+      .collection("services")
       .findOne({ _id: new ObjectId(params.id) });
     // console.log(resp);
     return NextResponse.json(resp);

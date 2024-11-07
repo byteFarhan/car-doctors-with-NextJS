@@ -1,16 +1,10 @@
-// import { useEffect, useState } from "react";
-// import SectionIntro from "../SectionIntro/SectionIntro";
 import SectionIntro from "@/components/SectionIntro/SectionIntro";
 import ServiceCard from "./ServiceCard/ServiceCard";
-// import { services } from "../../../../public/data/services";
 import getTopServices from "@/lib/getTopServices";
 import Link from "next/link";
 
 const Services = async () => {
   const topServices = await getTopServices();
-  // console.log(topServices);
-
-  // console.log(services);
 
   return (
     <>
