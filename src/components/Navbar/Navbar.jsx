@@ -9,9 +9,10 @@ const navItems = [
   { routeName: "Services", routePath: "/services" },
   { routeName: "My Bookings", routePath: "/my-bookings" },
   { routeName: "Add Service", routePath: "/add-service" },
+  { routeName: "My Services", routePath: "/my-services" },
   // { routeName: "About", routePath: "/about" },
   // { routeName: "Blog", routePath: "/blog" },
-  { routeName: "Contact", routePath: "/contact" },
+  // { routeName: "Contact", routePath: "/contact" },
   { routeName: "Appointment", routePath: "/appointment", isLgHidden: true },
   // { routeName: "Login", routePath: "/login", isLgHidden: true },
 ];
