@@ -56,6 +56,7 @@ const CheckoutForm = ({ handlerFunc, serviceName, userEmail }) => {
             <textarea
               className="p-3 rounded-lg outline-secondary focus:outline-1"
               name="message"
+              placeholder="Your Message"
               cols="30"
               rows="8"
               required

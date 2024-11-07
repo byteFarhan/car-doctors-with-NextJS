@@ -43,6 +43,7 @@ const AddServiceForm = ({ handlerFunc, authorEmail }) => {
             <textarea
               className="p-3 rounded-lg outline-secondary focus:outline-1"
               name="description"
+              placeholder="Service Description"
               cols="30"
               rows="8"
               required

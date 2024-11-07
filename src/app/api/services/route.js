@@ -14,3 +14,16 @@ export const POST = async (request) => {
     );
   }
 };
+
+export const GET = async () => {
+  const db = await connectDB();
+  try {
+    const services = await db.collection("services").find().toArray();
+    return NextResponse.json(services);
+  } catch (error) {
+    return NextResponse.json(
+      { message: "Internal server error!", error },
+      { status: 500 }
+    );
+  }
+};

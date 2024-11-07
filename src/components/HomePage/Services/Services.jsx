@@ -4,6 +4,7 @@ import SectionIntro from "@/components/SectionIntro/SectionIntro";
 import ServiceCard from "./ServiceCard/ServiceCard";
 // import { services } from "../../../../public/data/services";
 import getTopServices from "@/lib/getTopServices";
+import Link from "next/link";
 
 const Services = async () => {
   const topServices = await getTopServices();
@@ -25,9 +26,11 @@ const Services = async () => {
               <ServiceCard key={service.service_id} service={service} />
             ))}
         </div>
-        <button className="block mx-auto my-10 btn-transparent btn-transparent-red">
-          More Services
-        </button>
+        <Link href={"/services"}>
+          <button className="block mx-auto my-10 btn-transparent btn-transparent-red">
+            More Services
+          </button>
+        </Link>
       </section>
     </>
   );
