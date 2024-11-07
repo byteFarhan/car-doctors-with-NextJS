@@ -42,7 +42,7 @@ const AddServiceForm = ({ handlerFunc, authorEmail }) => {
           <div className="form-control lg:col-span-2">
             <textarea
               className="p-3 rounded-lg outline-secondary focus:outline-1"
-              name="message"
+              name="description"
               cols="30"
               rows="8"
               required
