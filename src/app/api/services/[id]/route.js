@@ -16,3 +16,25 @@ export const GET = async (request, { params }) => {
     );
   }
 };
+
+export const PATCH = async (request, { params }) => {
+  const db = await connectDB();
+  try {
+    const id = params?.id;
+    const updatedService = await request.json();
+    const updatedDoc = {
+      $set: {
+        ...updatedService,
+      },
+    };
+    const resp = await db
+      .collection("services")
+      .updateOne({ _id: new ObjectId(id) }, updatedDoc, { upsert: true });
+    return NextResponse.json(resp);
+  } catch (error) {
+    return NextResponse.json(
+      { message: "Internal server error!", error },
+      { status: 500 }
+    );
+  }
+};

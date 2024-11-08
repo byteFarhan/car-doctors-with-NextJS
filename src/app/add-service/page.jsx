@@ -18,7 +18,7 @@ const AddService = () => {
     const newService = {
       title: form.service.value,
       img: form.img.value,
-      price: form.price.value,
+      price: parseFloat(form.price.value),
       description: form.description.value,
       authorEmail,
       postedDate: new Date().toLocaleDateString(),

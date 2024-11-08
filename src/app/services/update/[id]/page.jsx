@@ -5,14 +5,54 @@ import React, { useEffect, useState } from "react";
 import InputField from "@/components/InputField/InputField";
 import { useSession } from "next-auth/react";
 import { getService } from "@/lib/getService";
+import { useRouter } from "next/navigation";
+import Swal from "sweetalert2";
 
 const UpdateService = ({ params }) => {
+  const router = useRouter();
   const session = useSession();
   const [service, setService] = useState({});
   useEffect(() => {
     getService(params?.id).then((service) => setService(service));
   }, []);
-  const { title, price, img, description, authorEmail } = service;
+  const { _id, title, price, img, description, authorEmail } = service;
+  const handleUpdate = async (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const updatedService = {
+      title: form.service.value,
+      img: form.img.value,
+      price: parseFloat(form.price.value),
+      description: form.description.value,
+    };
+    try {
+      const resp = await fetch(
+        `${process.env.NEXT_PUBLIC_API_URL}/api/services/${_id}`,
+        {
+          method: "PATCH",
+          body: JSON.stringify(updatedService),
+          headers: {
+            "content-type": "application/json",
+          },
+        }
+      );
+      const { modifiedCount } = await resp.json();
+      if (modifiedCount) {
+        form.reset();
+        router.push("/my-services");
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "Service updated successfully.🎉",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <section className="container">
       <PageTitle
@@ -22,10 +62,7 @@ const UpdateService = ({ params }) => {
         titleBG={titleBG}
       />
       <section className="px-6 py-10 my-16 rounded-lg md:my-20 lg:my-32 md:px-10 md:py-16 lg:p-24 bg-light-gray">
-        <form
-          //  onSubmit={handlerFunc}
-          className="space-y-6"
-        >
+        <form onSubmit={handleUpdate} className="space-y-6">
           <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
             <InputField
               placeholder="Service Name"
