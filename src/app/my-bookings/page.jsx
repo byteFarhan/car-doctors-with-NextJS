@@ -66,7 +66,7 @@ const MyBookings = () => {
 
 export default MyBookings;
 
-export const BookingCard = ({ booking, fetchBookings }) => {
+const BookingCard = ({ booking, fetchBookings }) => {
   const { userInfo, _id, dateBooked, serviceInfo, isAccepted } = booking;
   const handleDelete = async (id) => {
     Swal.fire({
@@ -74,8 +74,8 @@ export const BookingCard = ({ booking, fetchBookings }) => {
       text: "You won't be able to revert the booking!",
       icon: "warning",
       showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "#3085d6",
       confirmButtonText: "Yes, delete it!",
     }).then(async (result) => {
       if (result.isConfirmed) {
