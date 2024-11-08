@@ -7,10 +7,12 @@ import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { signIn } from "next-auth/react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 
 const Login = () => {
   const router = useRouter();
+  const pathName = useSearchParams();
+  const path = pathName.get("_redirect");
   const [showPassword, setShowPassword] = useState(false);
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -26,7 +28,7 @@ const Login = () => {
     // console.log(resp);
     if (resp.ok) {
       form.reset();
-      router.push("/");
+      router.push(path ? path : "/");
       Swal.fire({
         position: "top-end",
         icon: "success",

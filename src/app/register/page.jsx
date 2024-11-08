@@ -6,11 +6,13 @@ import Image from "next/image";
 import SocialLogin from "@/components/SocialLogin/SocialLogin";
 import { useState } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { signIn } from "next-auth/react";
 
 const Register = () => {
   const router = useRouter();
+  const pathName = useSearchParams();
+  const path = pathName.get("_redirect");
   const [showPassword, setShowPassword] = useState(false);
   const handleRegister = async (e) => {
     e.preventDefault();
@@ -46,7 +48,7 @@ const Register = () => {
       });
       // console.log(result);
       if (result.ok) {
-        router.push("/");
+        router.push(path ? path : "/");
         form.reset();
         Swal.fire({
           position: "top-end",
