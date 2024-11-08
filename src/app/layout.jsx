@@ -28,7 +28,7 @@ const description =
 export const metadata = {
   title: {
     default: "Car Doctors",
-    template: "%s || Car Doctors",
+    template: "%s | Car Doctors",
   },
   description: description,
   keywords: description.split(" "),

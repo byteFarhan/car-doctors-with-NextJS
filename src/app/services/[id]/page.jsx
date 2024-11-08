@@ -12,6 +12,16 @@ import Link from "next/link";
 import { GoArrowRight } from "react-icons/go";
 import { getService } from "@/lib/getService";
 
+export const generateMetadata = async ({ params }) => {
+  const service = await getService(params.id);
+  return {
+    title: {
+      absolute: service?.title,
+    },
+    description: service?.description,
+    keywords: service?.description.split(" "),
+  };
+};
 const ServiceDetails = async ({ params }) => {
   const topServices = await getTopServices();
   const filteredServices = topServices.filter(

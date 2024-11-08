@@ -8,6 +8,16 @@ import { useSession } from "next-auth/react";
 import Swal from "sweetalert2";
 import { useRouter } from "next/navigation";
 
+// const generateMetadata = ({ params }) => {
+//   const [service, setService] = useState({});
+//   getService(params.id).then((service) => setService(service));
+//   return {
+//     title: {
+//       absolute: "Checkout" | service?.title,
+//     },
+//   };
+// };
+
 const Checkout = ({ params }) => {
   const router = useRouter();
   const [service, setService] = useState({});

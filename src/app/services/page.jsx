@@ -4,6 +4,9 @@ import titleBG from "@/../public/assets/images/checkout/checkout.png";
 import ServiceCard from "@/components/ServiceCard/ServiceCard";
 import { getAllServices } from "@/lib/getAllServices";
 
+export const metadata = {
+  title: "Services",
+};
 const Services = async () => {
   const services = await getAllServices();
   return (
