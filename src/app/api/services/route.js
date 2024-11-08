@@ -15,10 +15,16 @@ export const POST = async (request) => {
   }
 };
 
-export const GET = async () => {
+export const GET = async (request) => {
   const db = await connectDB();
   try {
-    const services = await db.collection("services").find().toArray();
+    let query = {};
+    const email = request.nextUrl.searchParams.get("_email");
+    //   console.log("email", email);
+    if (email) {
+      query = { authorEmail: email };
+    }
+    const services = await db.collection("services").find(query).toArray();
     return NextResponse.json(services);
   } catch (error) {
     return NextResponse.json(
