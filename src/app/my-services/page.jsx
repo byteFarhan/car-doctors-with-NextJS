@@ -135,7 +135,7 @@ const MyServiceCard = ({ service, fetchmyServices }) => {
         </button>
       </div>
       <div className="hidden space-x-4 lg:block">
-        <Link href="#">
+        <Link href={`services/update/${_id}`}>
           <button className="text-black transition-colors duration-200 dark:hover:text-yellow-500 dark:text-gray-300 hover:text-yellow-500 focus:outline-none">
             <svg
               xmlns="http://www.w3.org/2000/svg"

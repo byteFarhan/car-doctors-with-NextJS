@@ -13,7 +13,7 @@ const navItems = [
   // { routeName: "About", routePath: "/about" },
   // { routeName: "Blog", routePath: "/blog" },
   // { routeName: "Contact", routePath: "/contact" },
-  { routeName: "Appointment", routePath: "/appointment", isLgHidden: true },
+  { routeName: "Appointment", routePath: "#", isLgHidden: true },
   // { routeName: "Login", routePath: "/login", isLgHidden: true },
 ];
 const Navbar = () => {
@@ -130,7 +130,7 @@ const Navbar = () => {
           </div>
         )}
 
-        <Link href={"/appointment"} className="hidden md:block">
+        <Link href={"#"} className="hidden md:block">
           <button className="btn-transparent btn-transparent-red">
             Appointment
           </button>
