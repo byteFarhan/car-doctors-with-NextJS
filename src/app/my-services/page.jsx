@@ -51,6 +51,41 @@ export default MyServices;
 
 const MyServiceCard = ({ service, fetchmyServices }) => {
   const { _id, postedDate, title, img, price, authorEmail } = service;
+  const handleDelete = async (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert the service!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "#3085d6",
+      confirmButtonText: "Yes, delete it!",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          const resp = await fetch(
+            `${process.env.NEXT_PUBLIC_API_URL}/api/services?_delete-service=${id}`,
+            {
+              method: "DELETE",
+            }
+          );
+          const { deletedCount } = await resp.json();
+          if (deletedCount) {
+            fetchmyServices();
+            Swal.fire({
+              position: "top-end",
+              icon: "success",
+              title: "Service deleted successfully.",
+              showConfirmButton: false,
+              timer: 1500,
+            });
+          }
+        } catch (error) {
+          console.log(error);
+        }
+      }
+    });
+  };
 
   return (
     <div className="flex flex-col justify-between gap-4 md:gap-4 lg:flex-row lg:items-center lg:gap-7">
@@ -92,7 +127,12 @@ const MyServiceCard = ({ service, fetchmyServices }) => {
         <button className="block text-black lg:hidden btn-transparent btn-transparent-gray">
           Edit
         </button>
-        <button className="block lg:hidden btn btn-fill">Delete</button>
+        <button
+          onClick={() => handleDelete(_id)}
+          className="block lg:hidden btn btn-fill"
+        >
+          Delete
+        </button>
       </div>
       <div className="hidden space-x-4 lg:block">
         <Link href="#">
@@ -114,7 +154,10 @@ const MyServiceCard = ({ service, fetchmyServices }) => {
             </svg>
           </button>
         </Link>
-        <button className="text-black transition-colors duration-200 dark:hover:text-red-500 dark:text-gray-300 hover:text-red-500 focus:outline-none">
+        <button
+          onClick={() => handleDelete(_id)}
+          className="text-black transition-colors duration-200 dark:hover:text-red-500 dark:text-gray-300 hover:text-red-500 focus:outline-none"
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
