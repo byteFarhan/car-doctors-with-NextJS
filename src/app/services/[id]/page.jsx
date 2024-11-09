@@ -40,13 +40,15 @@ const ServiceDetails = async ({ params }) => {
       />
       <section className="gap-6 mb-16 md:mb-20 lg:mb-32 lg:grid lg:grid-cols-3">
         <div className="lg:col-span-2">
-          <div>
+          <div className="relative">
             <Image
               className="object-cover w-full max-h-[500px] rounded-xl"
               src={img}
               alt={title}
-              height={400}
-              width={700}
+              height={500}
+              width={888}
+              // sizes="(max-width: 768px) calc(100vw - 48px), 888px"
+              priority
             />
           </div>
           <div className="mt-6 mb-5 lg:mt-12 md:mt-8 space-y-7 lg:mb-7">

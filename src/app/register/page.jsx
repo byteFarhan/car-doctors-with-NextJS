@@ -143,7 +143,7 @@ const Register = () => {
                 <p className="my-3 text-center">
                   {`Already have an account? `}
                   <Link
-                    href={"/login"}
+                    href={`/login`}
                     className="text-primary hover:underline"
                   >
                     Login

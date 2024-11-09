@@ -20,11 +20,14 @@ const PageTitle = ({ title, pagePath, titleBG, isPathLeft }) => {
             </p>
           </div>
           <Image
-            className="object-cover rounded-[10px] w-full max-h-48 lg:max-h-[300px]"
+            className="object-cover rounded-[10px] w-full h-48 lg:h-[300px]"
             alt="page title image"
             src={titleBG}
             height={300}
-            width={500}
+            width={1200}
+            // fill
+            placeholder="blur"
+            // priority
           />
           {isPathLeft || (
             <div className="relative justify-center hidden lg:flex">

@@ -14,8 +14,9 @@ const ContactInfo = () => {
             src={calenderIcon}
             alt="calender Icon"
             draggable={false}
-            width={"auto"}
-            // height={"auto"}
+            className="w-8 md:w-12"
+            width={50}
+            height={70}
           />
           <div className="space-y-2">
             <p className="text-white">We are open monday-friday</p>
@@ -27,7 +28,9 @@ const ContactInfo = () => {
             src={phoneIcon}
             alt="phone Icon"
             draggable={false}
-            width={"auto"}
+            className="w-8 md:w-12"
+            width={50}
+            height={70}
           />
           <div className="space-y-2">
             <p className="text-white">Have a question?</p>
@@ -41,7 +44,9 @@ const ContactInfo = () => {
             src={locationIcon}
             alt="location Icon"
             draggable={false}
-            width={"auto"}
+            className="w-8 md:w-12"
+            width={50}
+            height={70}
           />
           <div className="space-y-2">
             <p className="text-white">Need a repair? our address</p>

@@ -13,7 +13,10 @@ const ServiceCard = ({ service }) => {
             src={img}
             alt={title}
             className="object-cover rounded-md cursor-pointer size-full"
-            fill
+            height={250}
+            width={385}
+            // fill
+            sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, 33vw"
           />
         </figure>
         <h4 className="">{title}</h4>
